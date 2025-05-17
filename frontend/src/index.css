@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navColor: #19d3da;
+  --color-descriptionColor: #686d76;
+  --color-titleColor: #373a40;
+
+  /* font size */
+
+  --text-titleSize: 28px;
+  --text-descriptionSize: 16px;
+}
