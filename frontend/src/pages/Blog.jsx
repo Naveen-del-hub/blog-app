@@ -1,6 +1,9 @@
 import Button from "../components/Button";
 import { IoGrid } from "react-icons/io5";
 import { useEffect, useState } from "react";
+import CreateBlogIcon from "../components/CreateBlogIcon";
+import { MdCreateNewFolder } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 const Blog = (props) => {
   const { value } = props;
@@ -27,9 +30,9 @@ const Blog = (props) => {
   }, []);
 
   return (
-    <div className="mt-5">
+    <div className="mt-5 px-20">
       {/* search bar */}
-      <div className="w-full flex items-center justify-center px-20 gap-5">
+      <div className="w-full flex items-center justify-center gap-5">
         <input
           type="text"
           placeholder="Search here......"
@@ -43,15 +46,31 @@ const Blog = (props) => {
         />
       </div>
 
-      <div>
-        {data.map((blog) => {
-          return (
-            // Ye return statement zaroori hai
-            <div key={blog._id}>
-              <h1>{blog.title}</h1>
-            </div>
-          );
-        })}
+      <div className="flex items-center justify-end mt-4">
+        {data.length > 0 ? (
+          <Link to={"/create-blog"}>
+            <MdCreateNewFolder className="text-2xl text-navColor" />
+          </Link>
+        ) : (
+          ""
+        )}
+      </div>
+
+      <div className="w-full flex flex-col items-center justify-center h-screen">
+        {data.length !== 0 ? (
+          data.map((item) => {
+            return (
+              <div key={item.title}>
+                <p>{item.title}</p>
+                <p>{item.description}</p>
+              </div>
+            );
+          })
+        ) : (
+          <Link to={"/create-blog"}>
+            <MdCreateNewFolder className="text-8xl text-navColor" />
+          </Link>
+        )}
       </div>
     </div>
   );

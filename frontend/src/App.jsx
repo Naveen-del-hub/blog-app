@@ -6,6 +6,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Myblogs from "./pages/Myblogs";
 import Protected from "./Protected";
+import CreateBlog from "./pages/CreateBlog";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           }
         />
         <Route path="/register" element={<Register />} />
+        <Route path="/create-blog" element={<CreateBlog />} />
       </Routes>
     </div>
   );

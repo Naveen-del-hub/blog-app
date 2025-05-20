@@ -145,3 +145,36 @@ export const deleteBlogController = async (req, res) => {
     });
   }
 };
+
+// Delete all perticular user's blog
+
+export const allBlogDeleteController = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    console.log("User ID:", id); // Debug
+
+    const deleted = await blogModel.deleteMany({
+      user: new mongoose.Types.ObjectId(id), // ✅ Yehi sabse important line hai
+    });
+
+    if (deleted.deletedCount === 0) {
+      return res.status(404).send({
+        message: "No blogs found for this user.",
+        success: false,
+      });
+    }
+
+    return res.status(200).send({
+      message: `Deleted ${deleted.deletedCount} blog(s) of user.`,
+      success: true,
+    });
+  } catch (error) {
+    console.error("Delete error:", error);
+    return res.status(500).send({
+      message: "Internal Server Error",
+      success: false,
+      error,
+    });
+  }
+};
